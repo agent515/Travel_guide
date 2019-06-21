@@ -1,5 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Sign up</title>
         <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.css">
         <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
@@ -67,6 +71,12 @@
                 height: 30;
                 width:100;
             }
+            
+            #ta {
+                opacity: 0.7;
+                border-radius: 5px;
+            }
+            
         </style>
         
     </head>
@@ -103,7 +113,7 @@
 -->             
         </ul>
             <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <input class="form-control mr-sm-2" type="search" placeholder="Location" aria-label="Search">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>&nbsp;&nbsp;
             <ul class="navbar-nav">
@@ -118,7 +128,7 @@
             
           </div>
         </nav>
-        
+        <br><br>
         <div class="container">
             <div class="jumbotron" >
                     <img src="" ><br><br>
@@ -162,17 +172,72 @@
                         
                         <input type="checkbox" id="checked" style="text-align: left;height: 15;width:15">  I agree your <a href="about.html">Terms and conditions</a><br><br>
                         
-                        <button onclick="sign_up()">Submit</button>
+                        <button onclick="user_sign_up()">Submit</button>
                     
-<!--                <script type="text/javascript" src="js/index.js" ></script>-->
-                <script type="text/javascript" src="js/jquery.js"></script>
+
 
             </div>
-        
+            <br><br>
+            
+            <div class="jumbotron">
+                <h2>Register as a place</h2>
+                <label>Name</label>
+                <input type="text" id="place_name" placeholder="place name"><br><br>
+                <label>Manager</label>
+                <input type="text" id="manager" placeholder="manager name"><br><br>
+                <label>Email-ID</label>
+                <input type="text" id="email"><br><br>
+                <label>Description</label><br>
+                <textarea rows="4" cols="50" id="ta" placeholder="enter text here"></textarea><br><br>
+                <label>Password</label>
+                <input type="password" id="pwd"><br><br>
+                <label>Confirm Password</label>
+                <input type="password" id="cpwd"><br><br>
+                <label>Location</label>
+                <select id="s1" >
+                    <option value="c" >CSMT-Churchgate</option>
+                    <option value="bc">Byculla</option>
+                    <option value="d">Dadar</option>
+                    <option value="b">Bandra</option>
+                    <option value="g">Ghatkopar</option>
+                    <option value="a">Andheri</option>
+                    <option value="t">Thane</option>
+                    <option value="m">Mulund</option>
+                    <option value="ml">Malad</option>
+                    <option value="bo">Borivali</option>
+                    <option value="gn">Ghansoli</option>
+                    <option value="v">Vashi</option>
+                    <option value="nu">Nerul</option>
+                    <option value="di">Dombivli</option>
+                    <option value="k">Kalyan</option>
+                    <option value="kh">Kharghar</option>
+                    <option value=p>Panvel</option>
+                    <option value="vs">Vasai</option>
+                    <option value="tl">Titwala</option>
+                    <option value="ne">Neral</option>
+                    <option value="k">Karjat</option>
+                    <option value="n">Kasara</option>
+                    <option value="kp">Khopoli</option>
+                </select><br><br>
+                
+                <label>Co-ordinates:</label><br>
+                <label>Longitude:</label>
+                <input type="text" id="longitude" placeholder="longitude" ><br><br>
+                <label>Latitude:</label>
+                <input type="text" id="latitude" placeholder="latitude" ><br><br>
+
+                <input type="checkbox" id="checked" style="text-align: left;height: 15;width:15">  I agree your <a href="about.html">Terms and conditions</a><br><br>
+
+                <button onclick="place_sign_up()">Submit</button>
+                    
+                
+            </div>
+         
         </div>
         
         
-        
+        <!--                <script type="text/javascript" src="js/index.js" ></script>-->
+                <script type="text/javascript" src="js/jquery.js"></script>
     
     </body>
 </html>
