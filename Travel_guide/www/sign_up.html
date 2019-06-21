@@ -1,0 +1,178 @@
+<html>
+    <head>
+        <title>Sign up</title>
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-grid.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-reboot.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css">
+        
+        <script src="https://kit.fontawesome.com/5a8ed04e95.js"></script>
+        
+        <script>
+        function sign_up() {
+    if( document.getElementById('checked').checked == false ){
+                alert("You need to accept our Terms and condition");
+            }
+    
+    else {
+        var db = openDatabase('travel_guide','1.0','Travel Guide DB',2*1024*1024);
+        var fname = $('#fname').val();
+        var lname = $('#lname').val();
+        var email = $('#email').val();
+        var pwd = $('#pwd').val();
+        var cpwd = $('#cpwd').val();
+        var location = $('#s1').val();
+        if(pwd != cpwd){
+            alert("Passwords do not match");
+        }
+        else{
+//            db.transaction(function(tx){
+//            tx.executeSql('CREATE TABLE IF NOT EXISTS USERS(fname varchar(25),lname varchar(25),email varchar(25)"+" PRIMARY KEY,password varchar(20),location varchar(25))');
+//            tx.executeSql('INSERT INTO USERS VALUES(?,?,?,?,?)',[fname,lname,email,pwd,location]);
+//        });
+            db.transaction(function(tx){
+//                tx.executeSql("CREATE TABLE IF NOT EXISTS USERS(fname varchar(25),lname varchar(25),email varchar(25) unique,password"+" varchar(20),location varchar(25))");
+                tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (fname,lname,email,password,location, PRIMARY KEY(email))');
+                tx.executeSql('INSERT INTO USERS VALUES(?,?,?,?,?)',[fname,lname,email,pwd,location]);
+                alert("Record inserted");
+                
+            })
+            
+        alert("Sign up successful");
+        window.location.href = "index.html";
+        }
+        
+        }
+
+}
+        
+        </script>
+        
+        <style>
+            input {
+                text-align: center;
+                height: 30;
+                width: 200;
+                border-radius: 5px;
+            }
+            button {
+                text-align: center;
+                height: 30;
+                border-radius: 10px;
+            }
+        
+            label {
+                height: 30;
+                width:100;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><i class="fa fa-suitcase"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+<!--
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+-->             
+        </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>&nbsp;&nbsp;
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>    
+                    
+                </li>
+                <li class="nav-item" id="log_info">
+                    <a class="nav-link" href="login.html">Log in</a>
+                </li>
+            </ul>
+            
+          </div>
+        </nav>
+        
+        <div class="container">
+            <div class="jumbotron" >
+                    <img src="" ><br><br>
+                    <h1>Sign up form</h1>
+                    
+                        <label>Name</label>
+                        <input type = "text" id="fname" placeholder="first name">&nbsp;&nbsp;
+                         <input type="text" id="lname" placeholder="last name">&nbsp;&nbsp;<br><br>
+                        <label>Email-ID</label>
+                        <input type="email" id="email">&nbsp;<br><br>
+                        <label>Password</label>
+                        <input type="password" id="pwd"><br><br>
+                        <label>Confirm Password</label>
+                        <input type="password" id="cpwd"><br><br>
+                        <label>Location</label>
+                        <select id="s1" >
+                            <option value="c" >CSMT-Churchgate</option>
+                            <option value="bc">Byculla</option>
+                            <option value="d">Dadar</option>
+                            <option value="b">Bandra</option>
+                            <option value="g">Ghatkopar</option>
+                            <option value="a">Andheri</option>
+                            <option value="t">Thane</option>
+                            <option value="m">Mulund</option>
+                            <option value="ml">Malad</option>
+                            <option value="bo">Borivali</option>
+                            <option value="gn">Ghansoli</option>
+                            <option value="v">Vashi</option>
+                            <option value="nu">Nerul</option>
+                            <option value="di">Dombivli</option>
+                            <option value="k">Kalyan</option>
+                            <option value="kh">Kharghar</option>
+                            <option value=p>Panvel</option>
+                            <option value="vs">Vasai</option>
+                            <option value="tl">Titwala</option>
+                            <option value="ne">Neral</option>
+                            <option value="k">Karjat</option>
+                            <option value="n">Kasara</option>
+                            <option value="kp">Khopoli</option>
+                        </select><br><br>
+                        
+                        <input type="checkbox" id="checked" style="text-align: left;height: 15;width:15">  I agree your <a href="about.html">Terms and conditions</a><br><br>
+                        
+                        <button onclick="sign_up()">Submit</button>
+                    
+<!--                <script type="text/javascript" src="js/index.js" ></script>-->
+                <script type="text/javascript" src="js/jquery.js"></script>
+
+            </div>
+        
+        </div>
+        
+        
+        
+    
+    </body>
+</html>
