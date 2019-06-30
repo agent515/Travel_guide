@@ -1,0 +1,111 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Index Page</title>
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-grid.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-reboot.css">
+        <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css">
+        
+        <script src="https://kit.fontawesome.com/5a8ed04e95.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><i class="fa fa-suitcase"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Location" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>&nbsp;&nbsp;
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>    
+                    
+                </li>
+                <li class="nav-item" id="log_info">
+                    <a class="nav-link" href="login.html">Log in</a>
+                </li>
+            </ul>
+            
+          </div>
+        </nav>
+        
+        <div class="container">
+                
+        
+        </div>
+        
+        
+        
+    
+    </body>
+</html>-->
+
+<!DOCTYPE HTML> 
+
+<html>  
+   <head> 
+  
+      <script type = "text/javascript"> 
+         var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024); 
+         var msg; 
+    
+         db.transaction(function (tx) { 
+            tx.executeSql('CREATE TABLE IF NOT EXISTS LOGS1 (email unique, log)'); 
+            tx.executeSql('INSERT INTO LOGS1 (email, log) VALUES (1, "foobar")'); 
+            tx.executeSql('INSERT INTO LOGS1 (email, log) VALUES (2, "logmsg")'); 
+            msg = '<p>Log message created and row inserted.</p>'; 
+            document.querySelector('#status').innerHTML =  msg; 
+         })
+
+         db.transaction(function (tx) { 
+            tx.executeSql('SELECT * FROM LOGS1s', [], function (tx, results) { 
+               var len = results.rows.length, i; 
+               msg = "<p>Found rows: " + len + "</p>"; 
+               document.querySelector('#status').innerHTML +=  msg; 
+      
+               for (i = 0; i < len; i++) { 
+                  msg = "<p><b>" + results.rows.item(i).log + "</b></p>"; 
+                  document.querySelector('#status').innerHTML +=  msg; 
+               } 
+            }, null); 
+         }); 
+      </script> 
+   </head> 
+  
+   <body> 
+      <div id = "status" name = "status">Status Message</div> 
+   </body> 
+</html>
