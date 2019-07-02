@@ -29,19 +29,22 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     
-     <script src="https://kit.fontawesome.com/5a8ed04e95.js"></script>
+    <script src="https://kit.fontawesome.com/5a8ed04e95.js"></script>
     
     <script>
     
     function login() {
-        var db = openDatabase('travel_guide','1.0','Travel Guide DB',2*1024*1024);
+        
+        var log_status = window.localStorage.getItem('user');
+        if(log_status=='#'){
+            var db = openDatabase('travel_guide','1.0','Travel Guide DB',2*1024*1024);
         var uname = $('#em1').val();
         var pwd = $('#pass').val();
         alert(uname+pwd);
         var vpass = "";
         var fname="";
         db.transaction(function (tx) { 
-            tx.executeSql('select * from users where email=?',[uname], function (tx, results) { 
+            tx.executeSql('select * from users',[], function (tx, results) { 
                var len = results.rows.length, i; 
 //               msg = "<p>Found rows: " + len + "</p>"; 
 //               document.querySelector('#status').innerHTML +=  msg; 
@@ -62,10 +65,8 @@
 //                  msg = "<p><b>" + results.rows.item(i).log + "</b></p>"; 
 //                  document.querySelector('#status').innerHTML +=  msg;
                fname = results.rows.item(i).fname;
-               } 
-            }, null);
-         }); 
-        if(pwd==vpass){
+                   
+                if(pwd==vpass){
             //To rememeber which user is logged in, record the username(email) in the localStorage
             window.localStorage.setItem("user",uname);
             alert(fname+", you're logged in!");
@@ -74,23 +75,21 @@
         else{
             alert("Invalid email or password\nfname= "+fname+" pass "+vpass);
         }
+               }
+                
+            }, null);
+            
+             
+         }); 
+            
+        }
+        else{
+            alert("You're already logged in as "+log_status+". Logout first!");
+        }
+        
+       
     }
     
-//    function selectRow(query, callBack){ // <-- extra param
-//   var result = [];
-//   db.transaction(function (tx) {
-//      tx.executeSql(query, [], function(tx, rs){
-//         for(var i=0; i<rs.rows.length; i++) {
-//            var row = rs.rows.item(i)
-//            result[i] = { id: row['id'],
-//                          name: row['name']
-//            }
-//         }
-//         console.log(result);
-//         callBack(result); // <-- new bit here
-//      }, errorHandler);
-//   });
-//} 
 
     
     </script>
@@ -210,7 +209,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="login.html">Log in</a>
+                                <div id="log_status">
+    <!--                                <a class="nav-link" href="login.html">Log in</a>-->
+
+                                </div>
                             </li>
 <!--
                             <li class="nav-item">
@@ -252,6 +254,7 @@
     </div>
 
     <div class="overlay"></div>
+    <script type="text/javascript" src="js/index.js" ></script>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -20,6 +20,10 @@
         <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-reboot.css">
         <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css">
+    
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />    
+        
+<!--        <link rel="stylesheet" href="css/index.css">-->
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/style3.css">
     <!-- Scrollbar Custom CSS -->
@@ -55,7 +59,7 @@
             db.transaction(function(tx){
 //                tx.executeSql("CREATE TABLE IF NOT EXISTS USERS(fname varchar(25),lname varchar(25),email varchar(25) unique,password"+" varchar(20),location varchar(25))");
                 
-                tx.executeSql('crate table if not exists users( id unique, email,fname,lname,password,location');
+                tx.executeSql('create table if not exists users(email unique,fname,lname,password,location)');
                 tx.executeSql('insert into users values(?,?,?,?,?)',[email,fname,lname,pwd,location]);
                 window.localStorage.setItem("user",email);
                 alert("Record inserted");
@@ -95,6 +99,10 @@
                 border-radius: 5px;
             }
             
+             .activeButton {
+            color: black;
+            background-color: grey;
+        }
         </style>
 </head>
 
@@ -195,7 +203,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="login.html">Log in</a>
+                                <div id="log_status">
+    <!--                                <a class="nav-link" href="login.html">Log in</a>-->
+
+                                </div>
                             </li>
 <!--
                             <li class="nav-item">
@@ -212,9 +223,22 @@
                     </div>
                 </div>
             </nav>
+<!--
+            <center>
+                        <h3><span id="as_user" style="padding-right: 10px; padding-left: 10px; border-color:5px solid black">User</span><span id="as_place" style="padding-right: 10px; padding-left: 10px; border-color: 5px solid black">Place</span></h3>
 
+            </center>
+-->
              <div class="container">
-            <div class="jumbotron" >
+                 <div id="sign_up">
+                    
+</div> <!-- /form -->
+                 
+                
+                 
+                <div id="user_sign_up">
+                <div class="jumbotron">
+               
                     <h1>Sign up form</h1><br><br>   
                     <h2>Register as a User</h2>
                 
@@ -258,12 +282,12 @@
                         <input type="checkbox" id="checked" style="text-align: left;height: 15;width:15">  I agree your <a href="about.html">Terms and conditions</a><br><br>
                         
                         <button onclick="user_sign_up()">Submit</button>
-                    
+                    </div>
 
 
             </div>
             <br><br>
-            
+             <div id="place_sign_up">
             <div class="jumbotron">
                 <h2>Register as a place</h2>
                 <label>Name</label>
@@ -318,14 +342,15 @@
                     
                 
             </div>
-         
+                 </div>
         </div>
         
         </div>
     </div>
 
     <div class="overlay"></div>
-
+    
+     <script type="text/javascript" src="js/index.js" ></script>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
@@ -353,7 +378,11 @@
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
         });
+        
+       
+        
     </script>
+    <script type="text/javascript" src="js/sign_up.js"></script>
     
 </body>
 
