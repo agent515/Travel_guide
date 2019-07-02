@@ -56,7 +56,11 @@
 <!--                <p>Dummy Heading</p>-->
 <!--                <li class="active">-->
                     <li>    
-                        <a href="user_home.html" aria-expanded="false">Home</a>
+                        <div id="log_status_home">
+<!--                        <a href="index.html" aria-expanded="false">Home</a>-->
+                            
+                        </div>
+                        
                         
 <!--                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>-->
 <!--
@@ -73,6 +77,13 @@
                     </ul>
 -->
                 </li>
+                <div id="log_status_options" >
+                    
+                    
+                    
+                    
+                </div>
+                
                 <li>
                     <a href="about.html">About</a>
 <!--
@@ -130,8 +141,8 @@
                     </button>
                     
                     <form id="search_pos" class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="location" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <input id="search_location" class="form-control mr-sm-2" type="search" placeholder="location" aria-label="Search">
+              <button onclick="search()" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
                     
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,9 +171,10 @@
                     </div>
                 </div>
             </nav>
-
-         <div class="container">
-                <button class="btn btn-primary" onclick="flight_info()">Flight API</button>
+        <div id="user_home_content">
+            
+            
+            
         </div>
         
         </div>
@@ -170,6 +182,7 @@
 
     <div class="overlay"></div>
     <script type="text/javascript" src="js/index.js" ></script>
+    <script type="text/javascript" src="js/user_home.js"></script>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -35,12 +35,13 @@
     
     function login() {
         
-        var log_status = window.localStorage.getItem('user');
-        if(log_status=='#'){
+        var user_log_status = window.localStorage.getItem('user');
+        var place_log_status = window.localStorage.getItem('place');
+        if(user_log_status=='#' || place_log_status =='#'){
             var db = openDatabase('travel_guide','1.0','Travel Guide DB',2*1024*1024);
         var uname = $('#em1').val();
         var pwd = $('#pass').val();
-        alert(uname+pwd);
+//        alert(uname+pwd);
         var vpass = "";
         var fname="";
         db.transaction(function (tx) { 
@@ -65,14 +66,18 @@
 //                  msg = "<p><b>" + results.rows.item(i).log + "</b></p>"; 
 //                  document.querySelector('#status').innerHTML +=  msg;
                fname = results.rows.item(i).fname;
-                   
+                
                 if(pwd==vpass){
+            
             //To rememeber which user is logged in, record the username(email) in the localStorage
+            console.log("verified");
             window.localStorage.setItem("user",uname);
             alert(fname+", you're logged in!");
+            window.localStorage.setItem('loc','#');
             window.location.href = "user_home.html";
         }
         else{
+            console.log("verified");
             alert("Invalid email or password\nfname= "+fname+" pass "+vpass);
         }
                }
@@ -80,7 +85,51 @@
             }, null);
             
              
-         }); 
+         });
+            //place_login()
+        db.transaction(function (tx) { 
+            tx.executeSql('select * from places',[], function (tx, results) { 
+               var len = results.rows.length, i; 
+//               msg = "<p>Found rows: " + len + "</p>"; 
+//               document.querySelector('#status').innerHTML +=  msg; 
+//      
+               for (i = 0; i < len; i++) { 
+//                  msg = "<p><b>" + results.rows.item(i).log + "</b></p>"; 
+//                  document.querySelector('#status').innerHTML +=  msg;
+                   vpass = results.rows.item(i).password;
+               } 
+
+            }, null);
+            tx.executeSql('select * from places where email=?',[uname], function (tx, results) { 
+               var len = results.rows.length, i; 
+//               msg = "<p>Found rows: " + len + "</p>"; 
+//               document.querySelector('#status').innerHTML +=  msg; 
+//      
+               for (i = 0; i < len; i++) { 
+//                  msg = "<p><b>" + results.rows.item(i).log + "</b></p>"; 
+//                  document.querySelector('#status').innerHTML +=  msg;
+               fname = results.rows.item(i).manager_name;
+                
+                if(pwd==vpass){
+            
+            //To rememeber which user is logged in, record the username(email) in the localStorage
+            console.log("verified");
+            window.localStorage.setItem("place",uname);
+            alert(fname+", you're logged in!");
+            window.localStorage.setItem('loc','#');
+            window.location.href = "SP_home.html";
+        }
+        else{
+            console.log("verified");
+            alert("Invalid email or password\nfname= "+fname+" pass "+vpass);
+        }
+               }
+                
+            }, null);
+            
+             
+         });
+            
             
         }
         else{
@@ -130,7 +179,10 @@
 <!--                <p>Dummy Heading</p>-->
 <!--                <li class="active">-->
                     <li>    
-                        <a href="index.html" aria-expanded="false">Home</a>
+                        <div id="log_status_home">
+<!--                        <a href="index.html" aria-expanded="false">Home</a>-->
+                            
+                        </div>
                         
 <!--                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>-->
 <!--
@@ -147,6 +199,10 @@
                     </ul>
 -->
                 </li>
+                <div id="log_status_options">
+                
+                
+                </div>
                 <li>
                     <a href="about.html">About</a>
 <!--

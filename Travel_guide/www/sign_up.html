@@ -63,16 +63,58 @@
                 tx.executeSql('insert into users values(?,?,?,?,?)',[email,fname,lname,pwd,location]);
                 window.localStorage.setItem("user",email);
                 alert("Record inserted");
+//                window.location.href = "login.html";
                 
             })
             
         alert("Sign up successful");
-//        window.location.href = "index.html";
+        window.location.href = "login.html";
         }
         
         }
 
 }
+        
+        function place_sign_up(){
+            if( document.getElementById('schecked').checked == false ){
+                alert("You need to accept our Terms and condition");
+            }
+    
+    else {
+        var db = openDatabase('travel_guide','1.0','Travel Guide DB',2*1024*1024);
+        var place_name = $('#place_name').val();
+        var manager = $('#manager').val();
+        var email = $('#semail').val();
+        var description = $('#ta').val();
+        var pwd = $('#spwd').val();
+        var cpwd = $('#scpwd').val();
+        var location = $('#s1').val();
+        var longitude = $('#slongitude').val();
+        var latitude = $('#slatitude').val();
+        if(pwd != cpwd){
+            alert("Passwords do not match");
+        }
+        else{
+//            db.transaction(function(tx){
+//            tx.executeSql('CREATE TABLE IF NOT EXISTS USERS(fname varchar(25),lname varchar(25),email varchar(25)"+" PRIMARY KEY,password varchar(20),location varchar(25))');
+//            tx.executeSql('INSERT INTO USERS VALUES(?,?,?,?,?)',[fname,lname,email,pwd,location]);
+//        });
+            db.transaction(function(tx){
+//                tx.executeSql("CREATE TABLE IF NOT EXISTS USERS(fname varchar(25),lname varchar(25),email varchar(25) unique,password"+" varchar(20),location varchar(25))");
+                
+                tx.executeSql('create table if not exists places(email unique,place_name,manager_name,description,password,location,longitude,latitude)');
+                tx.executeSql('insert into places values(?,?,?,?,?,?,?,?)',[email,place_name,manager,description,pwd,location,longitude,latitude]);
+                alert("Record inserted");
+//                window.location.href = "login.html";
+                
+            })
+            
+        alert("Sign up successful");
+        window.location.href = "login.html";
+        }
+        
+        }
+    }
         
         </script>
         
@@ -124,7 +166,10 @@
 <!--                <p>Dummy Heading</p>-->
 <!--                <li class="active">-->
                     <li>    
-                        <a href="index.html" aria-expanded="false">Home</a>
+                        <div id="log_status_home">
+<!--                        <a href="index.html" aria-expanded="false">Home</a>-->
+                            
+                        </div>
                         
 <!--                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>-->
 <!--
@@ -141,6 +186,10 @@
                     </ul>
 -->
                 </li>
+                <div id="log_status_options">
+                
+                
+                </div>
                 <li>
                     <a href="about.html">About</a>
 <!--
